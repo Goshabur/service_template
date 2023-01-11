@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(service_template CXX)
+project(cpp-reseller-backend CXX)
 
 include(third_party/userver/cmake/SetupEnvironment.cmake)
 include(GNUInstallDirs)
@@ -9,10 +9,18 @@ add_subdirectory(third_party/userver)
 
 # Common sources
 add_library(${PROJECT_NAME}_objs OBJECT
-    src/hello.hpp
-    src/hello.cpp
+		src/handlers/get-data/view.hpp
+		src/handlers/get-data/view.cpp
+		src/handlers/insert-data/view.hpp
+		src/handlers/insert-data/view.cpp
+		src/handlers/delete-data/view.hpp
+		src/handlers/delete-data/view.cpp
+		src/model/iphone.hpp
+		src/model/iphone.cpp
+		src/model/supplier_iphone.hpp
+		src/model/supplier_iphone.cpp
 )
-target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-core)
+target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-core userver-postgresql)
 
 
 # The Service
@@ -22,7 +30,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
 
 # Unit Tests
 add_executable(${PROJECT_NAME}_unittest
-    src/hello_test.cpp
 )
 target_link_libraries(${PROJECT_NAME}_unittest PRIVATE ${PROJECT_NAME}_objs userver-utest)
 add_google_tests(${PROJECT_NAME}_unittest)
@@ -30,7 +37,6 @@ add_google_tests(${PROJECT_NAME}_unittest)
 
 # Benchmarks
 add_executable(${PROJECT_NAME}_benchmark
-	src/hello_benchmark.cpp
 )
 target_link_libraries(${PROJECT_NAME}_benchmark PRIVATE ${PROJECT_NAME}_objs userver-ubench)
 add_google_benchmark_tests(${PROJECT_NAME}_benchmark)

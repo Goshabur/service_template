@@ -5,3 +5,7 @@ logger-level: debug
 is_testing: false
 
 server-port: 8080
+
+#dbconnection: 'postgresql://code_architecture_user:password@localhost:5432/code_architecture_db-1'
+dbconnection: 'postgresql://tsypk:15.Aleksei@c-c9qikb36ojt5s6c7vpfo.rw.mdb.yandexcloud.net:6432/tsypk'
+#dbconnection: 'postgresql://c-c9qikb36ojt5s6c7vpfo.rw.mdb.yandexcloud.net:6432/tsypk?sslmode=verify-full'
